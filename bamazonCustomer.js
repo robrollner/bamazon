@@ -1,3 +1,4 @@
+var AsciiTable = require('ascii-table');
 var mysql = require('mysql');
 var fs = require('fs');
 var colors = require('colors');
@@ -12,89 +13,60 @@ var connection = mysql.createConnection({
     database: 'bamazon'
 });
 
-connection.connect(function(err) {
-    if (err) throw err;
-    console.log('connected as ID'.green + connection.threadId);
-    customerInquiry();
-});
-//connection works
+
+customerInquiry();
+
 
 function customerInquiry() {
+    let table = new AsciiTable();
+    table.setHeading('ID', 'Item', 'Description', 'Price', 'Quantity');
+
+    connection.query('SELECT * FROM products', (err, res) => {
+        console.log(`\n       See what's in stock below!`.red);
+        res.forEach((inventory) => {
+            table.addRow(inventory.id, inventory.item, inventory.itemDesc, inventory.price, inventory.quantity);
+        })
+        console.log(`${table.toString().green}\n`);
+
+        setTimeout(purchase, 700);
+    });
+}
+
+function purchase(item) {
     inquirer.prompt([{
-        type: 'list',
-        message: 'Which department is your item located?'.america,
-        choices: ['grocery'.bgCyan.yellow, 'electronics'.bgYellow.cyan, 'clothing'.bgCyan.yellow, 'exit'.bgYellow.cyan],
-        name: 'departments'
-    }]).then((dept) => {
-        switch (dept.departments) {
-            case "grocery":
-                grocery();
-                break;
+        name: 'id',
+        message: 'Please enter the id # for the item you would like to purchase'.red,
+        validate: (value) => !isNaN(value)
+    }, {
+        name: 'quota',
+        message: 'How many of this item would you like to purchase?'.yellow,
+        validate: (value) => !isNaN(value)
+    }]).then((result) => {
+        checkout(result.id, result.quota);
+    })
 
-            case 'electronics':
-                electronics();
-                break;
+}
 
-            case 'clothing':
-                clothing();
-                break;
+function checkout(id, quota) {
+    connection.query(`SELECT * FROM products WHERE id= ${id}`, function(err, res) {
+        if (err) throw err;
+        // exit();
 
-            case 'exit':
-                exit();
-                break;
+        if (quota > res[0].quantity) {
+            console.log("We're sorry, we currently do not have the stock to fill your order.");
+            customerInquiry();
+        } else {
+            var total = quota * res[0].price;
+            console.log(`Great choice! Your purchase costs ${total}`);
+            setTimeout(exit, 1500);
         }
     })
 }
 
-function grocery() {
-    inquirer.prompt([{
-        name: "food",
-        type: 'list',
-        message: "How can we help you?",
-        choices: ['ice cream', 'wine', 'whiskey', 'amaro']
-    }]).then((answer) => {
-
-        // var items = answer;
-        // var query = `SELECT * FROM products WHERE ?`;
-        // connection.query(query, { food: answer.food }, function(err, res) {
-        //         for (var i = 0; i < res.length; i++) {
-        //             console.log(`see if it works`);
-        //         }
-        //     })
-        //item in ('${items}')
-
-    })
-    logIt();
-}
-
-function electronics() {
-    inquirer.prompt([{
-
-    }])
-
-    logIt();
-}
-
-function clothing() {
-    inquirer.prompt([{
-
-    }])
-    logIt();
-}
 
 function exit() {
-    // if (err) throw err;
-    logIt();
-    console.log("Thank you for shopping with RobCo, please come again".italic.cyan);
-}
 
 
-connection.end(); //end of connection
-
-function logIt(buyerResults) {
-    console.log(buyerResults);
-    var now = new Date();
-    fs.appendFile('inventory.json', "\n" + now + ": " + buyerResults, function(err, data) {
-        if (err) throw err;
-    });
+    console.log("Thank you for shopping with RobCo, please come again");
+    connection.end();
 }
