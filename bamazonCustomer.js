@@ -54,19 +54,40 @@ function checkout(id, quota) {
 
         if (quota > res[0].quantity) {
             console.log("We're sorry, we currently do not have the stock to fill your order.");
-            customerInquiry();
+            setTimeout(customerInquiry, 1500);
+
         } else {
             var total = quota * res[0].price;
             console.log(`Great choice! Your purchase costs ${total}`);
-            setTimeout(exit, 1500);
+            updateInventory();
+            setTimeout(repurchase, 1500);
         }
     })
 }
 
+function updateInventory() {
+
+}
+
+
+function repurchase() {
+    inquirer.prompt([{
+        name: 'more',
+        message: 'Would you like to make another purchase?'.gray,
+        type: 'confirm'
+    }]).then((result) => {
+        if (result.more === true) {
+            console.log("Awesome!");
+            setTimeout(customerInquiry, 750);
+        } else {
+            setTimeout(exit, 750);
+        }
+    })
+}
 
 function exit() {
 
 
-    console.log("Thank you for shopping with RobCo, please come again");
+    console.log("Thank you for shopping with RobCo, please come again!");
     connection.end();
 }
