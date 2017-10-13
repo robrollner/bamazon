@@ -19,12 +19,12 @@ customerInquiry();
 
 function customerInquiry() {
     let table = new AsciiTable();
-    table.setHeading('ID', 'Item', 'Description', 'Price', 'Quantity');
+    table.setHeading('ID', 'Item', 'Department', 'Description', 'Price', 'Quantity');
 
     connection.query('SELECT * FROM products', (err, res) => {
         console.log(`\n       See what's in stock below!`.red);
         res.forEach((inventory) => {
-            table.addRow(inventory.id, inventory.item, inventory.itemDesc, inventory.price, inventory.quantity);
+            table.addRow(inventory.id, inventory.item, inventory.department, inventory.itemDesc, inventory.price, inventory.quantity);
         })
         console.log(`${table.toString().green}\n`);
 
