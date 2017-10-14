@@ -41,6 +41,7 @@ function purchase(item) {
         name: 'quota',
         message: 'How many of this item would you like to purchase?'.yellow,
         validate: (value) => !isNaN(value)
+
     }]).then((result) => {
         checkout(result.id, result.quota);
     })
@@ -58,22 +59,29 @@ function checkout(id, quota) {
 
         } else {
             var total = quota * res[0].price;
-            console.log(`Great choice! Your purchase costs ${total}`);
-            updateInventory();
+            console.log(`Great choice! Your purchase costs $${total}`.magenta);
+            buy(id, res[0].quantity, quota, total);
             setTimeout(repurchase, 1500);
         }
     })
 }
 
-function updateInventory() {
+function buy(id, itemQuota, customerQuota, total) {
+    var qty = itemQuota - customerQuota;
+    updateInventory(id, qty, total);
+};
 
+function updateInventory(id, quota, total) {
+    connection.query(`UPDATE products SET quantity=${quota} WHERE id=${id}`, (err, res) => {
+        if (err) throw err;
+    })
 }
 
 
 function repurchase() {
     inquirer.prompt([{
         name: 'more',
-        message: 'Would you like to make another purchase?'.gray,
+        message: 'Would you like to make another purchase?'.green,
         type: 'confirm'
     }]).then((result) => {
         if (result.more === true) {
@@ -87,7 +95,6 @@ function repurchase() {
 
 function exit() {
 
-
-    console.log("Thank you for shopping with RobCo, please come again!");
+    console.log("Thank you for shopping with RobCo, please come again!".cyan);
     connection.end();
 }
