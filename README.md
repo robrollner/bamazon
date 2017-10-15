@@ -29,7 +29,7 @@ If the **Show Low Counts** is selected the app will display the items that curre
 
 The **Menu** will reload and prompt the user to enter a new *function*. If the **Add Items** is selected the app will run through a series of prompts that asks the user which item ID they want to restock and the quantity of that item they want to add.
 
-![bamazonManager.js add items gif]()
+![bamazonManager.js add items gif](https://media.giphy.com/media/3ohhwDF5qFk6AVjCms/giphy.gif)
 
 The **Menu** will reload and prompt the user to enter a new *function*. If the **Add New Products** is selected the app will run through a series of prompts asking the user to enter the name of the new item: 
 
