@@ -39,7 +39,7 @@
 
 ![bamazonManager.js add new item department gif](https://media.giphy.com/media/l1J9KHr8yf6u5VA6Q/giphy.gif)
 
-#### An are to enter a brief description: 
+#### An area to enter a brief description: 
 
 ![bamazonManager.js add new item description gif](https://media.giphy.com/media/3ohhwjoipQVqdNAHVS/giphy.gif)
 
