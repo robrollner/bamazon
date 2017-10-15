@@ -13,7 +13,7 @@ In the command line the user enters **node bamazonCustomer.js**, the app will di
 3. The application will sum the total and display how much that purchase costs.
 4. The app will then prompt the user if they would like to make another purchase.
 
-![bamazonCustomer.js in action](https://github.com/robrollner/bamazon/blob/master/bamazonCustomer.mp4)
+![bamazonCustomer.js in action gif](https://media.giphy.com/media/xT9IglFq465IMJKqnC/giphy.gif)
 
 
 
