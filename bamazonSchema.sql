@@ -16,3 +16,6 @@ CREATE TABLE products (
 UPDATE products SET quantity = 50 WHERE id = 1;
 
 UPDATE products SET price = 1600.00 where id = 3;
+
+insert into products (item, department, itemDesc, quantity, price)
+values ('ice cream', 'grocery', 'rich creamy and delicious', 50, 2.25)

@@ -21,7 +21,7 @@ function customerInquiry() {
     let table = new AsciiTable();
     table.setHeading('ID', 'Item', 'Department', 'Description', 'Price', 'Quantity');
 
-    connection.query('SELECT * FROM products', (err, res) => {
+    connection.query('SELECT * FROM products WHERE quantity > 0', (err, res) => {
         console.log(`\n       See what's in stock below!`.red);
         res.forEach((inventory) => {
             table.addRow(inventory.id, inventory.item, inventory.department, inventory.itemDesc, inventory.price, inventory.quantity);
