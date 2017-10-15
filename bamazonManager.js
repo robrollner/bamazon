@@ -3,7 +3,6 @@ var mysql = require('mysql');
 var fs = require('fs');
 var colors = require('colors');
 var inquirer = require('inquirer');
-// var inventory = require('./inventory.json');
 
 var connection = mysql.createConnection({
     host: "localhost",
