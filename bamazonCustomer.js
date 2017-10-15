@@ -3,7 +3,6 @@ var mysql = require('mysql');
 var fs = require('fs');
 var colors = require('colors');
 var inquirer = require('inquirer');
-// var inventory = require('./inventory.json');
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -51,7 +50,7 @@ function purchase(item) {
 function checkout(id, quota) {
     connection.query(`SELECT * FROM products WHERE id= ${id}`, function(err, res) {
         if (err) throw err;
-        // exit();
+
 
         if (quota > res[0].quantity) {
             console.log("We're sorry, we currently do not have the stock to fill your order.");
