@@ -21,8 +21,33 @@ The user is prompted to select which manager *function* to run. If the **Show Fu
 
 ![bamazonManager.js show full counts gif](https://media.giphy.com/media/xT9IgsgCwWk8UiRb5C/giphy.gif)
 
-The **Menu** will reload and prompt the user to enter a new *function*. If the **Show Low Counts** is selected the app will display the items that currently have *5 or less* in their inventory in stock.
+The **Menu** will reload and prompt the user to enter a new *function*. 
 
+If the **Show Low Counts** is selected the app will display the items that currently have *5 or less* in stock.
 
+![bamazonManager.js show low counts gif](https://media.giphy.com/media/l378dbtVzlKKo6W6k/giphy.gif)
 
+The **Menu** will reload and prompt the user to enter a new *function*. If the **Add Items** is selected the app will run through a series of prompts that asks the user which item ID they want to restock and the quantity of that item they want to add.
+
+![bamazonManager.js add items gif]()
+
+The **Menu** will reload and prompt the user to enter a new *function*. If the **Add New Products** is selected the app will run through a series of prompts asking the user to enter the name of the new item: 
+
+![bamazonManager.js add new item name gif]()
+
+A ***sub menu*** that asks which department the item belongs in:
+
+![bamazonManager.js add new item department gif]()
+
+An are to enter a brief description: 
+
+![bamazonManager.js add new item description gif]()
+
+How many to stock of the item:
+
+![bamazonManager.js add new item quantity gif]()
+
+And the cost of the item:
+
+![bamazonManager.js add new item price gif]()
 
